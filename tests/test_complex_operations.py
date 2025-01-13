@@ -1,6 +1,8 @@
 import pytest
+import math
 from complex.ComplexNumber import ComplexNumber
 from complex.ComplexOperations import ComplexOperations
+from complex.ComplexRepresentation import ComplexRepresentation
 
 def test_addition():
     c1 = ComplexNumber(1, 2) # 1 + 2i
@@ -32,3 +34,21 @@ def test_modulus():
     c = ComplexNumber(1, 2) # 1 + 2i
     # |c| = sqrt(1^2 + 2^2) = sqrt(1 + 4) = sqrt(5)
     assert ComplexOperations.__modulus__(c) == (5) ** 0.5
+
+def test_cartesian_to_polar():
+    c = ComplexNumber(1, 2) # 1 + 2i
+    # r = sqrt(1^2 + 2^2) = sqrt(1 + 4) = sqrt(5)
+    # theta = atan(2/1) = atan(2)
+    c.cartesian_to_polar()
+    assert c.get_r() == (5) ** 0.5
+    assert c.get_theta() == math.atan(2)
+    assert c.get_representation() == ComplexRepresentation.POLAR
+
+def test_polar_to_cartesian():
+    c = ComplexNumber((5) ** 0.5, math.atan(2), ComplexRepresentation.POLAR) # 1 + 2i
+    # r = sqrt(1^2 + 2^2) = sqrt(1 + 4) = sqrt(5)
+    # theta = atan(2/1) = atan(2)
+    c.polar_to_catesian()
+    assert abs(c.get_real() - 1) <= 0.0002
+    assert abs(c.get_imaginary() - 2) <= 0.0002
+    assert c.get_representation() == ComplexRepresentation.CARTESIAN
