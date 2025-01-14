@@ -92,8 +92,5 @@ class ComplexMatrix:
             return False
         conjugate_transpose_mult_result1 = self * self.conjugate_transpose()
         conjugate_transpose_mult_result2 = self.conjugate_transpose() * self
-        print(conjugate_transpose_mult_result1)
-        print()
-        print(conjugate_transpose_mult_result2)
         identity_matrix = ComplexMatrix(rows=self.rows, cols=self.cols, matrix=[[ComplexNumber(1, 0) if i == j else ComplexNumber(0, 0) for j in range(self.cols)] for i in range(self.rows)])
         return conjugate_transpose_mult_result1 == identity_matrix and conjugate_transpose_mult_result2 == identity_matrix
