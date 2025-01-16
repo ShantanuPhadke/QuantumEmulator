@@ -84,3 +84,21 @@ def test_unitary():
         [ComplexNumber(1/2, 0), ComplexNumber(0, -1/math.sqrt(3)), ComplexNumber(0, 5/(2*math.sqrt(15)))]
     ])
     assert V.check_unitary() == True
+
+def test_tensor_product_vectors():
+    V1 = ComplexVector(2, [ComplexNumber(2,0), ComplexNumber(3,0)])
+    V2 = ComplexVector(2, [ComplexNumber(4,0), ComplexNumber(6,0), ComplexNumber(3,0)])
+    result = V1.tensor_product(V2)
+    assert result == ComplexVector(6, [ComplexNumber(8,0), ComplexNumber(12,0), ComplexNumber(6,0), ComplexNumber(12,0), ComplexNumber(18,0), ComplexNumber(9,0)])
+
+def test_tensor_product_matrices():
+    A = ComplexMatrix(matrix=[[ComplexNumber(1,0), ComplexNumber(2,0)], [ComplexNumber(3,0), ComplexNumber(4,0)]])
+    B = ComplexMatrix(matrix=[[ComplexNumber(5,0), ComplexNumber(6,0)], [ComplexNumber(7,0), ComplexNumber(8,0)]])
+    result = A.tensor_product(B)
+    assert result == ComplexMatrix(matrix=[
+        [ComplexNumber(5,0), ComplexNumber(6,0), ComplexNumber(10,0), ComplexNumber(12,0)],
+        [ComplexNumber(7,0), ComplexNumber(8,0), ComplexNumber(14,0), ComplexNumber(16,0)],
+        [ComplexNumber(15,0), ComplexNumber(18,0), ComplexNumber(20,0), ComplexNumber(24,0)],
+        [ComplexNumber(21,0), ComplexNumber(24,0), ComplexNumber(28,0), ComplexNumber(32,0)]
+    ])
+

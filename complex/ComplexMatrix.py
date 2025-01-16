@@ -94,3 +94,12 @@ class ComplexMatrix:
         conjugate_transpose_mult_result2 = self.conjugate_transpose() * self
         identity_matrix = ComplexMatrix(rows=self.rows, cols=self.cols, matrix=[[ComplexNumber(1, 0) if i == j else ComplexNumber(0, 0) for j in range(self.cols)] for i in range(self.rows)])
         return conjugate_transpose_mult_result1 == identity_matrix and conjugate_transpose_mult_result2 == identity_matrix
+    
+    def tensor_product(self, other):
+        result = ComplexMatrix(rows=self.rows * other.rows, cols=self.cols * other.cols)
+        for i in range(self.rows):
+            for j in range(self.cols):
+                for k in range(other.rows):
+                    for l in range(other.cols):
+                        result[i * other.rows + k, j * other.cols + l] = self[i, j] * other[k, l]
+        return result
